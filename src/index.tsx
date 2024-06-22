@@ -4,6 +4,7 @@ import { testComponent } from './components/testComponents'
 import Layout from './components/Layout'
 import Login from './components/Login'
 import Register from './components/Register'
+import Dashboard from "./components/Dashboard";
 import * as elements from "typed-html"
 import { logger } from "@bogeychan/elysia-logger";
 import { staticPlugin } from '@elysiajs/static'
@@ -63,6 +64,14 @@ const app = new Elysia()
 
     return data.user
 
+  })
+
+  .get("/dashboard", async ({html}: any) => {
+    return html(
+      <Layout title="MasterWarning - Dashboard">
+        <Dashboard />
+      </Layout>
+    )
   })
   .listen(3000);
 
