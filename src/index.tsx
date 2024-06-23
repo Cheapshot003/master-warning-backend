@@ -13,7 +13,6 @@ import { auth, deriveUser } from "./auth/authModule";
 import { asHookType } from "elysia/utils";
 import { appModule } from "./auth/dashboardModule";
 
-
 const app = new Elysia()
   .use(html())
   .use(staticPlugin())

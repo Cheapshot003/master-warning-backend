@@ -9,29 +9,27 @@ import { SignInWithPasswordCredentials, SignInWithPasswordlessCredentials } from
 import cookie from "@elysiajs/cookie";
 
 export const deriveUser = async ({ cookie: {refresh_token, access_token}}: any) => {
-    console.log("XD")                    
-    const { data, error } = await supabase.auth.getUser(
-                            access_token.value 
-                        )
+    if (!access_token.value) return { user: null }
+    const { data, error } = await supabase.auth.getUser(access_token.value)
 
-                        if (data.user) {
-                            return { user: data.user }
-                        }
+    if (data.user) { return { user: data.user } }
 
+    if (!refresh_token.value) return { user: null }
+    const { data: refreshed, error: refreshError} = 
+        await supabase.auth.refreshSession({
+            refresh_token: refresh_token.value
+        })
 
-                        const { data: refreshed, error: refreshError} = 
-                            await supabase.auth.refreshSession({
-                                refresh_token: refresh_token.value
-                            })
-
-                        if (refreshError) return {
-                            user: null
-                        }
-
-                        return {
-                            user: refreshed.user!
-                        }
-                    }
+    if (refreshError) {
+        console.log("REFRESHERROR")
+        return {
+        user: null
+    }}
+    console.log("REFRESHSESSION")
+    return {
+        user: refreshed.user!
+    }
+}
 
 export const auth = (app: Elysia) =>
     app
