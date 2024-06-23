@@ -13,6 +13,7 @@ export default ({ children, title, user }: LayoutProps) => (
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <title>{title}</title>
       <script src="https://cdn.tailwindcss.com"></script>
+      <script src="/public/index.js"></script>
       <script src="https://unpkg.com/htmx.org@2.0.0"></script>
     </head>
     <body class="min-h-screen flex flex-col items-center justify-center bg-gray-100">

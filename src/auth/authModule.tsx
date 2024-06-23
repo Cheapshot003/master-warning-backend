@@ -2,11 +2,8 @@ import { supabase } from "./supabaseClient";
 import { Elysia, redirect, t } from "elysia";
 import Layout from "../components/Layout";
 import Register from "../components/Register";
-import { html } from '@elysiajs/html'
 import Login from "../components/Login";
-import * as elements from "typed-html";
-import { SignInWithPasswordCredentials, SignInWithPasswordlessCredentials } from "@supabase/supabase-js";
-import cookie from "@elysiajs/cookie";
+import { SignInWithPasswordCredentials, User } from "@supabase/supabase-js";
 
 export const deriveUser = async ({ cookie: {refresh_token, access_token}}: any) => {
     if (!access_token.value) return { user: null }
@@ -21,11 +18,9 @@ export const deriveUser = async ({ cookie: {refresh_token, access_token}}: any) 
         })
 
     if (refreshError) {
-        console.log("REFRESHERROR")
         return {
         user: null
     }}
-    console.log("REFRESHSESSION")
     return {
         user: refreshed.user!
     }

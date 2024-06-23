@@ -1,4 +1,4 @@
-type User = {
-    name: string,
-    email: string,
+export interface Device {
+    id?: string,
+    name: string
 }
