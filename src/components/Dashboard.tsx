@@ -1,5 +1,6 @@
 import * as elements from "typed-html";
 
-export default ({ children, title } : any) => (
-    <h1></h1>
+export default ({ user } : any) => (
+    
+    <h1>Welcome, {user.email}</h1>
 )
